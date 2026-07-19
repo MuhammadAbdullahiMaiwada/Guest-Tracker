@@ -1,0 +1,4 @@
+list of dependencies
+flask
+flask-jwt-extended
+Sqlite3

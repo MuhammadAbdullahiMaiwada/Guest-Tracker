@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Guest Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Guest Check-in / Check-out</h1>
+
+    <form method="post" action="/checkin">
+        <input type="text" name="name" placeholder="Guest Name" required>
+        <input type="text" name="purpose" placeholder="Purpose of Visit" required>
+        <button type="submit">Check In</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>ID/</th>
+            <th>Name/</th>
+            <th>Purpose/</th>
+            <th>Check-in/</th>
+            <th>Check-out/</th>
+            <th>Action/</th>
+        </tr>
+
+        {% for guest in guests %}
+        <tr>
+            <td>{{ guest[0] }}</td>
+            <td>{{ guest[1] }}</td>
+            <td>{{ guest[2] }}</td>
+            <td>{{ guest[3] }}</td>
+            <td>{{ guest[4] if guest[4] else "active" }}</td>
+            <td>
+                {% if not guest[4] %}
+                <a href="/checkout/{{ guest[0] }}">Check Out </a>
+                {% else %}
+                -
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>
